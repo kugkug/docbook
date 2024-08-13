@@ -1,0 +1,3 @@
+.table-hovered tr:not(.expandable-body):hover {
+    opacity: .6;
+}

@@ -139,6 +139,10 @@ class Practitioner extends Model
         return $this->hasMany(AwardsPublication::class, 'parent_id');
     }
 
+    public function clinic_address() {
+        return $this->hasOne(ClinicAddress::class, 'parent_id');
+    }
+
 
     // public function gender(): HasOne {
     //     return $this->hasOne(GenderType::class, 'id');

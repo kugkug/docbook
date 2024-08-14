@@ -104,11 +104,25 @@ class PractitionerHelper {
         if (isset($request['basic_information'])) {
             foreach($request['basic_information'] as $col_key => $col_value) {
                 
-                if (!in_array($col_key, ['specialty', 'address_one', 'address_two', 'city', 'professional_suffix'])) {
+                if (!in_array($col_key, [
+                    'specialty', 
+                    'address_one', 
+                    'address_two', 
+                    'city', 
+                    'state', 
+                    'zip_code', 
+                    'professional_suffix'
+                ])) {
                     $return['practitioner_data'][$col_key] = $col_value;
                 }
 
-                if (in_array($col_key, ['address_one', 'address_two', 'city'])) {
+                if (in_array($col_key, [
+                    'address_one', 
+                    'address_two', 
+                    'city',
+                    'state', 
+                    'zip_code',
+                ])) {
                     $return['addresses_data'][$col_key] = $col_value;
                     $return['addresses_data']['parent_id'] = $practitioner_id;
                     $return['addresses_data']['created_at'] = $timestamp;
@@ -302,6 +316,7 @@ class PractitionerHelper {
     public static function getPractitionerData($practitioner_id) {
         $data = [];
         $data = Practitioner::where('id', $practitioner_id)
+            ->with('clinic_address')
             ->with('gender')
             ->with('suffixes')
             ->with('faith')

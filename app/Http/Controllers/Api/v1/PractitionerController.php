@@ -190,7 +190,6 @@ class PractitionerController extends Controller
 
             //clini Addresses
             if (isset($data['addresses_data'])) {
-                
                 ClinicAddress::where('parent_id', $practitioner_id)->delete();
                 ClinicAddress::create($data['addresses_data']);   
             }
